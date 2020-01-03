@@ -14,10 +14,12 @@ class CreateBeasiswasTable extends Migration
     public function up()
     {
         Schema::create('beasiswas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('title');
+            $table->string('organizer');
+            $table->string('time');
+            $table->string('location');
             $table->text('description');
-            $table->timestamp('time');
             $table->timestamps();
         });
     }

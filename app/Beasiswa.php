@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Beasiswa extends Model
 {
 
-    protected $fillable = ['title', 'description', 'time'];
+    protected $fillable = ['title','organizer', 'time', 'location', 'description'];
 
 
     public function users() {

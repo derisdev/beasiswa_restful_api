@@ -52,21 +52,28 @@ class BeasiswaController extends Controller
 
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required',
+            'organizer' => 'required',
             'time' => 'required',
+            'location' => 'required',
+            'description' => 'required',
             'user_id' => 'required',
         ]);
 
 
         $title = $request-> input('title');
-        $description = $request-> input('description');
+        $organizer = $request-> input('organizer');
         $time = $request-> input('time');
+        $location = $request-> input('location');
+        $description = $request-> input('description');
         $user_id = $request-> input('user_id');
         
        $beasiswa = new Beasiswa([
-           'time' => $time,
            'title' => $title,
-           'description' => $description
+           'organizer' => $organizer,
+           'time' => $time,
+           'location' => $location,
+           'description' => $description,
+           'user_id' => $user_id,
        ]);
 
        if ($beasiswa->save()) {
@@ -125,17 +132,24 @@ class BeasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required',
+            'organizer' => 'required',
             'time' => 'required',
+            'location' => 'required',
+            'description' => 'required',
             'user_id' => 'required',
         ]);
 
+
         $title = $request-> input('title');
-        $description = $request-> input('description');
+        $organizer = $request-> input('organizer');
         $time = $request-> input('time');
+        $location = $request-> input('location');
+        $description = $request-> input('description');
         $user_id = $request-> input('user_id');
+        
 
         $beasiswa = Beasiswa::with('users')->findOrFail($id);
 
@@ -143,8 +157,10 @@ class BeasiswaController extends Controller
             return response()->json(['msg' => 'user not registered for beasiswa update not succesful'], 401);
         }
 
-        $beasiswa->time = $time;
         $beasiswa->title = $title;
+        $beasiswa->organizer = $organizer;
+        $beasiswa->time = $time;
+        $beasiswa->location = $location;
         $beasiswa->description = $description;
 
 
